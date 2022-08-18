@@ -6,6 +6,17 @@ server:
 spring:
   application:
     name: tdd-card-user
+  datasource:
+    url: jdbc:postgresql://localhost:5432/tdd_registration
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    password: root
+  flyway:
+    enabled: true
+    baseline-on-migrate: true
+    table: tdd_registration_flyway_schema_history
+  jpa:
+    show-sql: true
 
 management:
   endpoint:
