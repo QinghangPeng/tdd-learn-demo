@@ -4,13 +4,17 @@ plugins {
     id 'idea'
 }
 
-apply plugin: 'org.springframework.boot'
-apply plugin: 'idea'
-
 apply from: "$rootDir/gradle/config/integration-test/integrationTest.gradle"
 
 group 'com.tdd.learn'
 version '1.0.0-SNAPSHOT'
+
+idea {
+    module {
+        testSourceDirs += project.sourceSets.integrationTest.java.srcDirs
+        testResourceDirs += project.sourceSets.integrationTest.resources.srcDirs
+    }
+}
 
 dependencies {
     implementation 'org.springframework.boot:spring-boot-starter-web'

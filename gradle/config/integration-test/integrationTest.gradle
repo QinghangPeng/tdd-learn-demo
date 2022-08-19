@@ -1,28 +1,23 @@
+// define the source set for integration test
 sourceSets {
     integrationTest {
         java {
-            compileClasspath += sourceSets.test.compileClasspath
-            runtimeClasspath += sourceSets.test.runtimeClasspath
+            java.srcDir file('src/integrationTest/java')
+
+            compileClasspath += main.output + test.output
+            runtimeClasspath += main.output + test.output
         }
+        resources.srcDir file('src/integrationTest/resources')
     }
 }
 
-dependencies {
-    integrationTestImplementation sourceSets.test.output
-}
-
-idea {
-    module {
-        testSourceDirs += project.sourceSets.integrationTest.java.srcDirs
-        testResourceDirs += project.sourceSets.integrationTest.resources.srcDirs
-    }
-}
-
+// define integration test configurations based on standard test configuration
 configurations {
-    integrationTestImplementation.extendsFrom implementation
+    integrationTestImplementation.extendsFrom testImplementation
     integrationTestRuntimeOnly.extendsFrom runtimeOnly
 }
 
+// define the integration test task
 task integrationTest(type: Test) {
     description = 'Runs integration tests.'
     group = 'verification'
@@ -33,4 +28,5 @@ task integrationTest(type: Test) {
     shouldRunAfter test
 }
 
+// add the integration test task
 check.dependsOn integrationTest

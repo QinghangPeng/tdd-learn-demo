@@ -7,10 +7,10 @@ spring:
   application:
     name: tdd-card-user
   datasource:
-    url: jdbc:postgresql://localhost:5432/tdd_registration
+    url: jdbc:postgresql://localhost:5432/tdd_card_user
     driver-class-name: org.postgresql.Driver
     username: postgres
-    password: root
+    password: postgres
   flyway:
     enabled: true
     baseline-on-migrate: true
